@@ -1,0 +1,27 @@
+---
+Name: leafletfield
+---
+LeafletField:
+  map_options:
+    center: 
+      latitude: "-40.866119"
+      longitude: "174.143780"
+    zoom: 5
+  draw_options:
+    position: 'topleft'
+    polyline:
+      shapeOptions:
+        color: '#269634'
+    polygon:
+      allowIntersection: false
+      drawError:
+        color: '#b00b00'
+        timeout: 1000
+      shapeOptions:
+        color: '#bada55'
+    rectangle:
+      shapeOptions:
+        color: '#662d91'
+    circle:
+      shapeOptions:
+        color: '#662d91'
