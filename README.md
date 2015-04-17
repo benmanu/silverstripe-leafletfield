@@ -3,6 +3,11 @@
 Provides a form field type allowing users to draw features on a map, the features are stored as geoJSON objects in a single database field.
 
 
+## Installation
+
+    $ composer require benmanu/silverstripe-leafletfield
+
+
 ## Basic Usage
 
 Create a text database field to store the geojson value.
