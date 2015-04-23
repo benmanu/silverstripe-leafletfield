@@ -172,9 +172,11 @@
 				value = JSON.parse(value);
 				bounds = value.bounds;
 
-				southWest = L.latLng(bounds._northEast.lat, bounds._northEast.lng);
-				northEast = L.latLng(bounds._southWest.lat, bounds._southWest.lng);
-				bounds = L.latLngBounds(southWest, northEast);
+				if(bounds !== void 0) {
+					southWest = L.latLng(bounds._northEast.lat, bounds._northEast.lng);
+					northEast = L.latLng(bounds._southWest.lat, bounds._southWest.lng);
+					bounds = L.latLngBounds(southWest, northEast);
+				}
 			}
 
 			return bounds;
