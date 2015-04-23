@@ -38,7 +38,7 @@ class LeafletField extends FormField {
 
 		$this->setupChildren($name);
 
-		parent::__construct($name, $title);
+		parent::__construct($name, $title, $data->$name);
 	}
 
 	/**
@@ -83,9 +83,13 @@ class LeafletField extends FormField {
 	 * {@inheritdoc}
 	 */
 	public function setValue($value, $data = null) {
+		
 		if(isset($value['Geometry'])) {
 			$this->geometryField->setValue($value['Geometry']);
+		} elseif(isset($value)) {
+			$this->geometryField->setValue($value);
 		}
+		
 		return $this;
 	}
 
