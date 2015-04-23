@@ -21,10 +21,10 @@
 			.setView(center, zoom);
 
 		// add an OpenStreetMap tile layer
-		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-		    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-		    maxZoom: 18
-		}).addTo(map);
+		L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 18
+        }).addTo(map);
 
 		// Initialise the FeatureGroup to store editable layers
 		var drawnItems = new L.FeatureGroup();
@@ -81,7 +81,7 @@
 				collection;
 
 			// check if exists
-			if(val !== void 0 && val !== '') {
+			if(val !== void 0 && /\[.+\]/.test(val)) {
 				collection = JSON.parse(val);
 			} else {
 				collection = [];
@@ -108,7 +108,7 @@
 				newCollection = [];
 
 			// check if exists
-			if(val !== void 0 && val !== '') {
+			if(val !== void 0 && /\[.+\]/.test(val)) {
 				collection = JSON.parse(val);
 			} else {
 				collection = [];
@@ -131,7 +131,7 @@
 			drawnItems.clearLayers();
 
 			// check if field value exists.
-			if(val !== void 0 && val !== '') {
+			if(val !== void 0 && /\[.+\]/.test(val)) {
 				collection = JSON.parse(val);
 			} else {
 				collection = [];
