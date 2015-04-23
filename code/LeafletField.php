@@ -83,13 +83,13 @@ class LeafletField extends FormField {
 	 * {@inheritdoc}
 	 */
 	public function setValue($value, $data = null) {
-		
-		if(isset($value['Geometry'])) {
+
+		if(is_array($value) && isset($value['Geometry'])) {
 			$this->geometryField->setValue($value['Geometry']);
-		} elseif(isset($value)) {
+		} elseif(is_string($value)) {
 			$this->geometryField->setValue($value);
 		}
-		
+
 		return $this;
 	}
 
