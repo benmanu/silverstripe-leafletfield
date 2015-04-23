@@ -77,18 +77,10 @@
 		// Update the field data.
 		function _onAdd(layer) {
 			var json = layer.toGeoJSON(),
-				val = geometryField.val(),
-				collection;
-
-			// check if exists
-			if(val !== void 0 && /\[.+\]/.test(val)) {
-				collection = JSON.parse(val);
-			} else {
-				collection = [];
-			}
+				collection = _getValue();
 
 			collection.push(json);
-			geometryField.val(JSON.stringify(collection));
+			_setValue(collection);
 		}
 
 		function _onEdit(layer) {
@@ -98,21 +90,13 @@
 				collection.push(layer.toGeoJSON());
 			});
 
-			geometryField.val(JSON.stringify(collection));
+			_setValue(collection);
 		}
 
 		function _onDelete(layer) {
 			var json = layer.toGeoJSON(),
-				val = geometryField.val(),
-				collection,
+				collection = _getValue(),
 				newCollection = [];
-
-			// check if exists
-			if(val !== void 0 && /\[.+\]/.test(val)) {
-				collection = JSON.parse(val);
-			} else {
-				collection = [];
-			}
 
 			for (var i = collection.length - 1; i >= 0; i--) {
 				if(JSON.stringify(collection[i]) !== JSON.stringify(json)) {
@@ -120,22 +104,14 @@
 				}
 			};
 
-			geometryField.val(JSON.stringify(newCollection));
+			_setValue(newCollection);
 		}
 
 		function _onLoad() {
-			var val = geometryField.val(),
-				collection;
+			var collection = _getValue();
 
 			// clear layers.
 			drawnItems.clearLayers();
-
-			// check if field value exists.
-			if(val !== void 0 && /\[.+\]/.test(val)) {
-				collection = JSON.parse(val);
-			} else {
-				collection = [];
-			}
 
 			// for each geoJson feature add a layer.
 			for (var i = collection.length - 1; i >= 0; i--) {
@@ -149,6 +125,26 @@
 			if(collection.length > 0) {
 				map.fitBounds(drawnItems.getBounds());
 			}
+		}
+
+		function _setValue(collection) {
+			layers = {
+				layers: collection
+			};
+			layers = JSON.stringify(layers);
+			geometryField.val(layers);
+		}
+
+		function _getValue() {
+			var value = geometryField.val(),
+				layers = [];
+
+			if(value !== void 0 && /\{"layers":\[.+\]}/.test(value)) {
+				value = JSON.parse(value);
+				layers = value.layers;
+			}
+
+			return layers;
 		}
 	}
 
