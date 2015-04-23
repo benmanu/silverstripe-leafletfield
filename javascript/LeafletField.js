@@ -14,11 +14,20 @@
 
 		var map,
 			center = [mapOptions.center.latitude, mapOptions.center.longitude],
-			zoom = mapOptions.zoom;
+			zoom = mapOptions.zoom,
+			bounds = mapOptions.bounds;
 
 		// create a map, set the view to a given place and zoom
 		map = L.map(mapElement)
 			.setView(center, zoom);
+		
+		// set bounds if available
+		if(bounds !== void 0) {
+			var southWest = L.latLng(bounds._northEast.lat, bounds._northEast.lng);
+			var northEast = L.latLng(bounds._southWest.lat, bounds._southWest.lng);
+			bounds = L.latLngBounds(southWest, northEast);
+			map.fitBounds(bounds);
+		}
 
 		// add an OpenStreetMap tile layer
 		L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -122,14 +131,20 @@
 				});
 			};
 
-			if(collection.length > 0) {
+			// set the bounds of the map
+			if(_getBounds() !== void 0) {
+				map.fitBounds(_getBounds());
+			} else if(collection.length > 0) {
 				map.fitBounds(drawnItems.getBounds());
 			}
 		}
 
 		function _setValue(collection) {
 			layers = {
-				layers: collection
+				layers: collection,
+				bounds: map.getBounds(),
+				zoom: map.getZoom(),
+				center: map.getCenter()
 			};
 			layers = JSON.stringify(layers);
 			geometryField.val(layers);
@@ -145,6 +160,24 @@
 			}
 
 			return layers;
+		}
+
+		function _getBounds() {
+			var value = geometryField.val(),
+				bounds,
+				southWest,
+				northEast;
+
+			if(value !== void 0 && /\{"layers":\[.+\]}/.test(value)) {
+				value = JSON.parse(value);
+				bounds = value.bounds;
+
+				southWest = L.latLng(bounds._northEast.lat, bounds._northEast.lng);
+				northEast = L.latLng(bounds._southWest.lat, bounds._southWest.lng);
+				bounds = L.latLngBounds(southWest, northEast);
+			}
+
+			return bounds;
 		}
 	}
 
