@@ -15,7 +15,10 @@
 		var map,
 			center = [mapOptions.center.latitude, mapOptions.center.longitude],
 			zoom = mapOptions.zoom,
-			bounds = mapOptions.bounds;
+			bounds = mapOptions.bounds,
+			tileLayer = (mapOptions.tileLayer ? mapOptions.tileLayer : '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'),
+			attribution = (mapOptions.attribution ? mapOptions.attribution : '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors'),
+			subdomains = (mapOptions.subdomains ? mapOptions.subdomains : '');
 
 		// create a map, set the view to a given place and zoom
 		map = L.map(mapElement)
@@ -30,8 +33,9 @@
 		}
 
 		// add an OpenStreetMap tile layer
-		L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+		L.tileLayer(tileLayer, {
+            attribution: attribution,
+            subdomains: subdomains,
             maxZoom: 18
         }).addTo(map);
 
