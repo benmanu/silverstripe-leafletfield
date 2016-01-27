@@ -67,10 +67,10 @@ class LeafletField extends FormField
         // set the html js attributes
         $this->setAttribute('data-map-options', $this->getMapOptionsJS());
         $this->setAttribute('data-draw-options', $this->getDrawOptionsJS());
-        
+
         // set the dependencies
         $this->requireDependencies();
-        
+
         return parent::Field($properties);
     }
 
@@ -179,8 +179,14 @@ class LeafletField extends FormField
         $this->options['draw'] = array_merge($this->options['draw'], $options);
     }
 
-    public function setLimit(Int $limit)
+    /**
+     * Set the limit of layers that can be added
+     * @param Integer $limit
+     */
+    public function setLimit($limit)
     {
-        $this->setMapOptions(array('layerLimit' => $limit));
+        if(is_int($limit)) {
+            $this->setMapOptions(array('layerLimit' => $limit));
+        }
     }
 }
