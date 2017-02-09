@@ -33,11 +33,16 @@
 		}
 
 		// add an OpenStreetMap tile layer
-		L.tileLayer(tileLayer, {
+        var tileLayerOptions = {
             attribution: attribution,
-            subdomains: subdomains,
             maxZoom: 18
-        }).addTo(map);
+        };
+
+        if (subdomains && subdomains !== '') {
+            tileLayerOptions.subdomains = subdomains;
+        }
+
+		L.tileLayer(tileLayer, tileLayerOptions).addTo(map);
 
 		// Initialise the FeatureGroup to store editable layers
 		var drawnItems = new L.FeatureGroup();
