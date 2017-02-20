@@ -25,6 +25,11 @@ class LeafletField extends FormField
     protected $options = array();
 
     /**
+     * @var array
+     */
+    protected $geoJsonlayers = [];
+
+    /**
      * @param string $name The name of the field
      * @param string $title The title of the field
      */
@@ -67,6 +72,7 @@ class LeafletField extends FormField
         // set the html js attributes
         $this->setAttribute('data-map-options', $this->getMapOptionsJS());
         $this->setAttribute('data-draw-options', $this->getDrawOptionsJS());
+        $this->setAttribute('data-map-layers', $this->getGeoJsonlayersJS());
 
         // set the dependencies
         $this->requireDependencies();
@@ -76,11 +82,11 @@ class LeafletField extends FormField
 
     protected function requireDependencies()
     {
-        Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js');
-        Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.2.3/leaflet.draw.js');
+        Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js');
+        Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.9/leaflet.draw.js');
         Requirements::javascript(LEAFLETFIELD_BASE .'/javascript/LeafletField.js');
-        Requirements::css('//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css');
-        Requirements::css('//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.2.3/leaflet.draw.css');
+        Requirements::css('//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css');
+        Requirements::css('//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.9/leaflet.draw.css');
         Requirements::css(LEAFLETFIELD_BASE .'/css/LeafletField.css');
     }
 
@@ -171,6 +177,15 @@ class LeafletField extends FormField
     }
 
     /**
+     * Return additional geoJsonlayers to display on the map.
+     * @return String
+     */
+    public function getGeoJsonlayersJS()
+    {
+        return Convert::array2json($this->geoJsonlayers);
+    }
+
+    /**
      * Set the draw options, will override the config defaults.
      * @param array $options
      */
@@ -188,5 +203,14 @@ class LeafletField extends FormField
         if(is_int($limit)) {
             $this->setMapOptions(array('layerLimit' => $limit));
         }
+    }
+
+    /**
+     * Set the additional geoJson layers (readonly)
+     * @param Array $geoJsonlayers
+     */
+    public function setGeoJsonLayers($geoJsonlayers)
+    {
+        $this->geoJsonlayers = $geoJsonlayers;
     }
 }
