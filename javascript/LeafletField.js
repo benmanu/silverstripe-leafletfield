@@ -55,7 +55,17 @@
       };
 
       L.geoJSON(additionalLayers, {
-        style: typeof additionalLayersStyle === 'object' ? additionalLayersStyle : defaultAdditionalLayersStyle,
+        style: function (layer) {
+          var layerStyle = defaultAdditionalLayersStyle;
+
+          if (typeof layer.properties.style === 'object') {
+            layerStyle = layer.properties.style;
+          } else if (typeof additionalLayersStyle === 'object') {
+            layerStyle = additionalLayersStyle;
+          }
+
+          return layerStyle;
+        },
       }).addTo(map);
     }
 
