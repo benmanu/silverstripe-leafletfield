@@ -27,7 +27,12 @@ class LeafletField extends FormField
     /**
      * @var array
      */
-    protected $geoJsonlayers = [];
+    protected $geoJsonlayers = array();
+
+    /**
+     * @var array
+     */
+    protected $geoJsonlayersStyle = array();
 
     /**
      * @param string $name The name of the field
@@ -73,6 +78,7 @@ class LeafletField extends FormField
         $this->setAttribute('data-map-options', $this->getMapOptionsJS());
         $this->setAttribute('data-draw-options', $this->getDrawOptionsJS());
         $this->setAttribute('data-map-layers', $this->getGeoJsonlayersJS());
+        $this->setAttribute('data-map-layers-style', $this->getGeoJsonlayersStyleJS());
 
         // set the dependencies
         $this->requireDependencies();
@@ -186,6 +192,15 @@ class LeafletField extends FormField
     }
 
     /**
+     * Return additional geoJsonlayers style to display on the map.
+     * @return String
+     */
+    public function getGeoJsonlayersStyleJS()
+    {
+        return Convert::array2json($this->geoJsonlayersStyle);
+    }
+
+    /**
      * Set the draw options, will override the config defaults.
      * @param array $options
      */
@@ -212,5 +227,14 @@ class LeafletField extends FormField
     public function setGeoJsonLayers($geoJsonlayers)
     {
         $this->geoJsonlayers = $geoJsonlayers;
+    }
+
+    /**
+     * Set the additional geoJson layers style (readonly)
+     * @param Array $geoJsonlayersStyle
+     */
+    public function setGeoJsonLayersStyle($geoJsonlayersStyle)
+    {
+        $this->geoJsonlayersStyle = $geoJsonlayersStyle;
     }
 }

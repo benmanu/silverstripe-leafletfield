@@ -10,6 +10,7 @@
     var mapOptions = JSON.parse(field.attr('data-map-options')),
       drawOptions = JSON.parse(field.attr('data-draw-options')),
       additionalLayers = JSON.parse(field.attr('data-map-layers')),
+      additionalLayersStyle = JSON.parse(field.attr('data-map-layers-style')),
       mapElement = field.find('.leafletfield-map')[0],
       geometryField = field.find('.leafletfield-geometry');
 
@@ -47,12 +48,14 @@
 
     // add any additional layers
     if (additionalLayers.length > 0) {
+      const defaultAdditionalLayersStyle = {
+        color: '#ff7800',
+        weight: 3,
+        opacity: 0.65,
+      };
+
       L.geoJSON(additionalLayers, {
-        style: {
-          color: '#ff7800',
-          weight: 3,
-          opacity: 0.65,
-        },
+        style: typeof additionalLayersStyle === 'object' ? additionalLayersStyle : defaultAdditionalLayersStyle,
       }).addTo(map);
     }
 
