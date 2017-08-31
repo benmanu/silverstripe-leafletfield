@@ -44,6 +44,10 @@
       tileLayerOptions.subdomains = subdomains;
     }
 
+    var roads = L.gridLayer.googleMutant({
+        type: 'roadmap' // valid values are 'roadmap', 'satellite', 'terrain' and 'hybrid'
+    }).addTo(map);
+
     L.tileLayer(tileLayer, tileLayerOptions).addTo(map);
 
     // add any additional layers
