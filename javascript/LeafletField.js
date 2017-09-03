@@ -18,7 +18,6 @@
       center = [mapOptions.center.latitude, mapOptions.center.longitude],
       zoom = mapOptions.zoom,
       bounds = mapOptions.bounds,
-      tileLayer = (mapOptions.tileLayer ? mapOptions.tileLayer : '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'),
       attribution = (mapOptions.attribution ? mapOptions.attribution : '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors'),
       subdomains = (mapOptions.subdomains ? mapOptions.subdomains : '');
 
@@ -34,17 +33,9 @@
       map.fitBounds(bounds);
     }
 
-    // add an OpenStreetMap tile layer
-    var tileLayerOptions = {
-      attribution: attribution,
-      maxZoom: 18,
-    };
-
-    if (subdomains && subdomains !== '') {
-      tileLayerOptions.subdomains = subdomains;
-    }
-
-    L.tileLayer(tileLayer, tileLayerOptions).addTo(map);
+    var roads = L.gridLayer.googleMutant({
+        type: 'roadmap' // valid values are 'roadmap', 'satellite', 'terrain' and 'hybrid'
+    }).addTo(map);
 
     // add any additional layers
     if (additionalLayers.length > 0) {

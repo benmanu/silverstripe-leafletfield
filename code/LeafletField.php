@@ -90,7 +90,10 @@ class LeafletField extends FormField
     {
         Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js');
         Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.9/leaflet.draw.js');
+        Requirements::javascript('//maps.googleapis.com/maps/api/js?key='.GOOGLE_MAP_API_KEY);
+        Requirements::javascript('//unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js');
         Requirements::javascript(LEAFLETFIELD_BASE .'/javascript/LeafletField.js');
+
         Requirements::css('//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css');
         Requirements::css('//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.9/leaflet.draw.css');
         Requirements::css(LEAFLETFIELD_BASE .'/css/LeafletField.css');
