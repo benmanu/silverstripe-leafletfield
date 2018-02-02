@@ -10,6 +10,10 @@ Provides a form field type allowing users to draw features on a map, the feature
 
 ## Basic Usage
 
+Import the field
+
+    use BenManu\LeafletField\LeafletField;
+
 Create a text database field to store the geojson value.
 
     public static $db = array(
@@ -27,9 +31,9 @@ Create a LeafletField, passing through the object that you want to store the val
 
 Define default field options through config.
 
-    LeafletField:
+    BenManu\LeafletField\LeafletField:
       map_options:
-        center: 
+        center:
           latitude: "-40.866119"
           longitude: "174.143780"
         zoom: 5
@@ -81,7 +85,7 @@ The draw options are set using the same structure as [Leaflet.draw options](http
 
 ## Requirements
 
-* SilverStripe 3.1
+* SilverStripe 4.0
 
 ## Project Links
 * [GitHub Project Page](https://github.com/benmanu/silverstripe-leafletfield)

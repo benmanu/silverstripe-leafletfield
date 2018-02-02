@@ -1,7 +1,7 @@
 {
 	"name": "benmanu/silverstripe-leafletfield",
 	"description": "Provides a form field type allowing users to draw features on a map, the features are stored as geoJSON objects in a single database field",
-	"type": "silverstripe-module",
+	"type": "silverstripe-vendormodule",
 	"homepage": "https://github.com/benmanu/silverstripe-leafletfield",
 	"keywords": ["silverstripe", "leaflet", "map"],
 	"support": {
@@ -14,9 +14,18 @@
 		}
 	],
 	"require": {
-		"silverstripe/framework": "~3.1"
+		"silverstripe/vendor-plugin": "^1.0",
+		"silverstripe/cms": "^4.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"BenManu\\LeafletField\\": "src/"
+		}
 	},
 	"extra": {
-		"installer-name": "leafletfield"
+		"installer-name": "leafletfield",
+		"expose": [
+			"client"
+		]
 	}
 }

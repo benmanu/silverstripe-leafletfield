@@ -1,4 +1,15 @@
 <?php
+
+namespace BenManu\LeafletField;
+
+use SilverStripe\Core\Convert;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\FormField;
+use SilverStripe\Forms\HiddenField;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\DataObjectInterface;
+use SilverStripe\View\Requirements;
+
 class LeafletField extends FormField
 {
 
@@ -90,10 +101,10 @@ class LeafletField extends FormField
     {
         Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js');
         Requirements::javascript('//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.9/leaflet.draw.js');
-        Requirements::javascript(LEAFLETFIELD_BASE .'/javascript/LeafletField.js');
+        Requirements::javascript('benmanu/silverstripe-leafletfield:client/javascript/LeafletField.js');
         Requirements::css('//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css');
         Requirements::css('//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.9/leaflet.draw.css');
-        Requirements::css(LEAFLETFIELD_BASE .'/css/LeafletField.css');
+        Requirements::css('benmanu/silverstripe-leafletfield:client/css/LeafletField.css');
     }
 
     /**
