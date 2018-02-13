@@ -236,26 +236,17 @@
 
   // CMS stuff: set the init method to re-run if the page is saved or pjaxed
   // there are no docs for the CMS implementation of entwine, so this is hacky
-  if (!!$.fn.entwine && $(document.body).hasClass('cms')) {
-    (function setupCMS() {
-      var matchFunction = function () {
+  $.entwine('ss', function ($) {
+    $(document).ajaxComplete(function () {
+      init();
+    });
+
+    $('.leafletfield').entwine({
+      onmatch: function () {
         init();
-      };
-      $.entwine('leafletfield', function ($) {
-        $('.cms-tabset').entwine({
-          onmatch: matchFunction,
-        });
-        $('.cms-tabset-nav-primary li').entwine({
-          onclick: matchFunction,
-        });
-        $('.ss-tabset li').entwine({
-          onclick: matchFunction,
-        });
-        $('.cms-edit-form').entwine({
-          onmatch: matchFunction,
-        });
-      });
-    }());
-  }
+        this._super();
+      },
+    });
+  });
 
 }(jQuery));

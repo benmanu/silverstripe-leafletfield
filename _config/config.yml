@@ -1,9 +1,6 @@
----
-Name: leafletfield
----
-LeafletField:
+BenManu\LeafletField\LeafletField:
   map_options:
-    center: 
+    center:
       latitude: "-40.866119"
       longitude: "174.143780"
     zoom: 5
