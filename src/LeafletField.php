@@ -49,7 +49,7 @@ class LeafletField extends FormField
      * @param string $name The name of the field
      * @param string $title The title of the field
      */
-    public function __construct($name, $title = null, DataObject $data)
+    public function __construct($name, $title, DataObject $data)
     {
         $this->data = $data;
 
