@@ -163,7 +163,7 @@ class LeafletField extends FormField
      */
     public function getMapOptionsJS()
     {
-        return Convert::array2json($this->getMapOptions());
+        return json_encode($this->getMapOptions());
     }
 
     /**
@@ -190,7 +190,7 @@ class LeafletField extends FormField
      */
     public function getDrawOptionsJS()
     {
-        return Convert::array2json($this->getDrawOptions());
+        return json_encode($this->getDrawOptions());
     }
 
     /**
@@ -199,7 +199,7 @@ class LeafletField extends FormField
      */
     public function getGeoJsonlayersJS()
     {
-        return Convert::array2json($this->geoJsonlayers);
+        return json_encode($this->geoJsonlayers);
     }
 
     /**
@@ -208,7 +208,7 @@ class LeafletField extends FormField
      */
     public function getGeoJsonlayersStyleJS()
     {
-        return Convert::array2json($this->geoJsonlayersStyle);
+        return json_encode($this->geoJsonlayersStyle);
     }
 
     /**
